@@ -6,7 +6,7 @@ This is **under development**..
 Actually, I already got the code. I just need to prepare it to run 'as is',
 without my Library extensions. When it's done, I'm going to publish it here.
 
-<br><br>
+<br>
 
 ## Description
 **TODO**. At the moment you can only look into the [code](src/radix.TODO.js)
