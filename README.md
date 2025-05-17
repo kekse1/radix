@@ -9,7 +9,11 @@ without my Library extensions. When it's done, I'm going to publish it here.
 <br><br>
 
 ## Description
-**TODO**.
+**TODO**. At the moment you can only look into the [code](src/radix.TODO.js)
+if you want to know more.
+
+I implemented this logics multiple times, and I really hope, this one is the
+'best' version.. if not, I'll also extend this file.
 
 <br><br>
 
