@@ -168,7 +168,7 @@ radix.features = (_radix, _throw = DEFAULT_THROW) => {
 	result.sign = (!result.bytes && (result.negative || result.positive));
 	result.lower = alpha.isLowerCase;
 	result.upper = (alpha.isUpperCase && !alpha.isLowerCase);
-	result.exp = null;
+	result.exp = null; //this is also *TODO*!
 	return result; };
 
 //
