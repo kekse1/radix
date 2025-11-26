@@ -23,6 +23,7 @@ It's meant for this base functionality:
 > [!NOTE]
 > It's **not** another [`decimal.js`](https://mikemcl.github.io/decimal.js/)!
 > If you need real numeric precision, use this one or smth. similar.
+> This `radix.js` just extends the base numeric features of JavaScript.
 
 ## Download
 Two main files. Partially still under development..
