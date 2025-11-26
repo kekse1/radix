@@ -1,13 +1,7 @@
 /*
 * Copyright (c) Sebastian Kucharczyk <kuchen@kekse.biz>
 * https://kekse.biz/ https://github.com/kekse1/radix.js/
-* ~v3.0.0
 */
-
-/*
- * THIS NEEDS PREPARATIONS .. actually I'm using it somewhere else,
- * where I've got many extensions. I don't want to use them in here!
- */
 
 //
 const DEFAULT_RADIX = 10;
@@ -25,6 +19,7 @@ alphabet.radix = radix;
 radix.alphabet = alphabet;
 
 export default radix;
+export { radix, alphabet };
 
 //
 const getAlphabet = alphabet.getAlphabet = (_radix, _throw = DEFAULT_THROW) => {
@@ -168,7 +163,7 @@ radix.features = (_radix, _throw = DEFAULT_THROW) => {
 	result.sign = (!result.bytes && (result.negative || result.positive));
 	result.lower = alpha.isLowerCase;
 	result.upper = (alpha.isUpperCase && !alpha.isLowerCase);
-	result.exp = null; //this is also *TODO*!
+	result.exp = null; // this is also *TODO*!
 	return result; };
 
 //
@@ -277,3 +272,4 @@ Reflect.defineProperty(global, 'parseFloat', { value: Number.parseFloat });
 Reflect.defineProperty(global, 'parseNumber', { value: Number.parseNumber });
 
 //
+

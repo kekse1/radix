@@ -1,20 +1,32 @@
 <img src="https://kekse.biz/github.php?draw&override=github:radix.js" />
 
 # **`radix.js`**
-This is **under development**..
+This is 'under development', maybe.. it needs adaption to run without
+my own library extension(s). But you can use it if you want to create
+your own polyfills - it should work really well, right now!
 
-Actually, I already got the [code](src/radix.TODO.js). I just need to prepare
-it to run 'as is', without my Library extensions. When it's done, I'm going
-to publish it here.
+I'm using it in the Web Browser and via [Node.js](https://nodejs.org/).
+
+Since I've implemented many versions of the same functionality (more/less),
+I had to decide which ones to publish here. I hope they fit for your needs!
 
 <br>
 
 ## Description
-**TODO**. At the moment you can only look into the [code](src/radix.TODO.js)
-if you want to know more.
+It's meant for this base functionality:
 
-I implemented this logics multiple times, and I really hope, this one is the
-'best' version.. if not, I'll also extend this file.
+- [x] Numeric conversions between various radix/base. Including some **alphabet** parts.
+- [x] Some other numeric functions, like testing strings, numbers, etc. pp..
+- [x] Parsing and Rendering both **time** and **size** values.
+- [x] Maybe more? Don't remember atm...
+
+## Download
+Two main files. Partially still under development..
+
+* [**`radix.js`**](src/radix.js)
+* [**`math.unit.js`**](src/math.unit.js)
+
+have phun!
 
 <br><br>
 
@@ -28,4 +40,3 @@ and it's licensed under the [MIT](LICENSE.txt) (also known as 'X' or 'X11' licen
 <a href="https://kekse.biz/">
 <img src="favicon.png" alt="Favicon" />
 </a>
-
