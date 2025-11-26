@@ -15,17 +15,20 @@ I had to decide which ones to publish here. I hope they fit for your needs!
 <br>
 
 ## Description
-It's meant for this base functionality:
+These are my main features:
 
 - [x] Numeric conversions between various radix/base.
 - [x] Including some **alphabet** parts.
 - [x] Even supports full **byte** code/radix/base (256).
+- [x] Extra \*near\* byte code w/ 1 to 3 less bytes for [ `.`, `-`, `+` ] bytes..
 - [x] Negative radix/base are also supported (inversed/reversed alphabets, ...);
+- [x] Unlike Vanilla JavaScript, I'm also supporting `parseFloat()` w/ dynamic radix/base.
 - [x] Some other numeric functions, like testing strings, numbers, etc. pp..
 - [x] Parsing and Rendering both **time** and **size** values.
 - [x] Some more numeric extensions (better sign handling, ...);
 - [x] Both `Number` and `BigInt` fully supported.
 - [ ] TODO: I've to find my old code for exponents.
+- [ ] TODO: Maybe also find my old code for localized strings..
 
 <br>
 
