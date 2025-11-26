@@ -20,6 +20,10 @@ It's meant for this base functionality:
 - [x] Parsing and Rendering both **time** and **size** values.
 - [x] Maybe more? Don't remember atm...
 
+> [!NOTE]
+> It's **not** another [`decimal.js`](https://mikemcl.github.io/decimal.js/)!
+> If you need real numeric precision, use this one or smth. similar.
+
 ## Download
 Two main files. Partially still under development..
 
