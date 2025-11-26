@@ -3,7 +3,7 @@
 # **`radix.js`**
 This is 'under development', maybe.. it needs adaption to run without
 my own library extension(s). But you can use it if you want to create
-your own polyfills - <u>it should work really well, right now</u>!
+your own polyfills - it should work really well, right now!
 
 I'm using it in the Web Browser and via [Node.js](https://nodejs.org/).
 
