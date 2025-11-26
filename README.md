@@ -20,7 +20,7 @@ It's meant for this base functionality:
 - [x] Even supports full **byte** code/radix/base (256).
 - [x] Some other numeric functions, like testing strings, numbers, etc. pp..
 - [x] Parsing and Rendering both **time** and **size** values.
-- [x] Maybe more? Don't remember atm...
+- [x] Both `Number` and `BigInt` fully supported.
 
 > [!NOTE]
 > It's **not** another [`decimal.js`](https://mikemcl.github.io/decimal.js/)!
