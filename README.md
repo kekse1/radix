@@ -5,7 +5,7 @@ This is 'under development', maybe.. it needs adaption to run without
 my own library extension(s). But you can use it if you want to create
 your own polyfills - it should work really well, right now!
 
-I'm using it in the Web Browser and via [Node.js](https://nodejs.org/).
+I'm using it in the Web Browser and w/ [Node.js](https://nodejs.org/).
 
 Since I've implemented many versions of the same functionality (more/less),
 I had to decide which ones to publish here. I hope they fit for your needs!
