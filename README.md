@@ -1,5 +1,7 @@
 <img src="https://kekse.biz/github.php?draw&override=github:radix.js" />
 
+<br><br>
+
 # **`radix.js`**
 This is 'under development', maybe.. it needs adaption to run without
 my own library extension(s). But you can use it if you want to create
@@ -22,10 +24,14 @@ It's meant for this base functionality:
 - [x] Parsing and Rendering both **time** and **size** values.
 - [x] Both `Number` and `BigInt` fully supported.
 
+<br>
+
 > [!NOTE]
 > It's **not** another [`decimal.js`](https://mikemcl.github.io/decimal.js/)!
 > If you need real numeric precision, use this one or smth. similar.
 > This `radix.js` just extends the base numeric features of JavaScript.
+
+<br>
 
 ## Download
 Two main files. Partially still under development..
