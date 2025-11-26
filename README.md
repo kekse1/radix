@@ -25,6 +25,7 @@ It's meant for this base functionality:
 - [x] Parsing and Rendering both **time** and **size** values.
 - [x] Some more numeric extensions (better sign handling, ...);
 - [x] Both `Number` and `BigInt` fully supported.
+- [ ] TODO: I've to find my old code for exponents.
 
 <br>
 
