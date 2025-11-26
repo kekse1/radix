@@ -37,7 +37,7 @@ It's meant for this base functionality:
 Two main files. Partially still under development..
 
 * [**`radix.js`**](src/radix.js)
-* [**`math.unit.js`**](src/math.unit.js)
+* [**`unit.js`**](src/unit.js)
 
 have phun!
 
