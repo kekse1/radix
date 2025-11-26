@@ -41,6 +41,12 @@ Two main files. Partially still under development..
 
 have phun!
 
+<br>
+
+## Tip
+See also my [**Field**](https://github.com/kekse1/field/) implementation,
+which is also using kinda base/radix conversion!
+
 <br><br>
 
 # Contact
