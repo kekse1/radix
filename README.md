@@ -20,8 +20,10 @@ It's meant for this base functionality:
 - [x] Numeric conversions between various radix/base.
 - [x] Including some **alphabet** parts.
 - [x] Even supports full **byte** code/radix/base (256).
+- [x] Negative radix/base are also supported (inversed/reversed alphabets, ...);
 - [x] Some other numeric functions, like testing strings, numbers, etc. pp..
 - [x] Parsing and Rendering both **time** and **size** values.
+- [x] Some more numeric extensions (better sign handling, ...);
 - [x] Both `Number` and `BigInt` fully supported.
 
 <br>
