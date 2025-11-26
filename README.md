@@ -15,7 +15,9 @@ I had to decide which ones to publish here. I hope they fit for your needs!
 ## Description
 It's meant for this base functionality:
 
-- [x] Numeric conversions between various radix/base. Including some **alphabet** parts.
+- [x] Numeric conversions between various radix/base.
+- [x] Including some **alphabet** parts.
+- [x] Even supports full **byte** code/radix/base (256).
 - [x] Some other numeric functions, like testing strings, numbers, etc. pp..
 - [x] Parsing and Rendering both **time** and **size** values.
 - [x] Maybe more? Don't remember atm...
