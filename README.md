@@ -10,7 +10,8 @@ your own polyfills - it should work really well, right now!
 I'm using it in the Web Browser and w/ [Node.js](https://nodejs.org/).
 
 Since I've implemented many versions of the same functionality (more/less),
-I had to decide which ones to publish here. I hope they fit for your needs!
+I had to decide which ones to publish here. I hope it's the best version
+for you!
 
 <br>
 
