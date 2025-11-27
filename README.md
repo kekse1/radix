@@ -1,8 +1,8 @@
-<img src="https://kekse.biz/github.php?draw&override=github:radix.js" />
+<img src="https://kekse.biz/github.php?draw&override=github:radix" />
 
 <br><br>
 
-# **`radix.js`**
+# **`radix`**
 This is 'under development', maybe.. it needs adaption to run without
 my own library extension(s). But you can use it if you want to create
 your own polyfills - it should work really well, right now!
@@ -16,7 +16,7 @@ for you!
 > [!NOTE]
 > It's **not** another [`decimal.js`](https://mikemcl.github.io/decimal.js/)!
 > If you need real numeric precision, use this one or smth. similar.
-> This `radix.js` just extends the base numeric features of JavaScript.
+> This `radix` module just extends the base numeric features of JavaScript.
 
 <br>
 
@@ -62,7 +62,7 @@ which is also using kinda base/radix conversion!
 <br><br>
 
 # Contact
-<img src="https://kekse.biz/github.php?override=github:radix.js&draw&text=radix.js@kekse.biz&angle=6&size=38pt&fg=150,20,90&font=OpenSans&ro&readonly&h=64&v=16" />
+<img src="https://kekse.biz/github.php?override=github:radix&draw&text=radix@kekse.biz&angle=6&size=38pt&fg=150,20,90&font=OpenSans&ro&readonly&h=64&v=16" />
 
 # Copyright and License
 The Copyright is [(c) Sebastian Kucharczyk](COPYRIGHT.txt),
