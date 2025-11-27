@@ -13,6 +13,11 @@ Since I've implemented many versions of the same functionality (more/less),
 I had to decide which ones to publish here. I hope it's the best version
 for you!
 
+> [!NOTE]
+> It's **not** another [`decimal.js`](https://mikemcl.github.io/decimal.js/)!
+> If you need real numeric precision, use this one or smth. similar.
+> This `radix.js` just extends the base numeric features of JavaScript.
+
 <br>
 
 ## Description
@@ -37,11 +42,6 @@ These are my main features:
 > [!WARNING]
 > Script(s) will extend the global `Number` and `BigInt` Objects,
 > so please `import` it/them only once!
-
-> [!NOTE]
-> It's **not** another [`decimal.js`](https://mikemcl.github.io/decimal.js/)!
-> If you need real numeric precision, use this one or smth. similar.
-> This `radix.js` just extends the base numeric features of JavaScript.
 
 <br>
 
