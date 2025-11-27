@@ -25,11 +25,13 @@ These are my main features:
 - [x] Negative radix/base are also supported (inversed/reversed alphabets, ...);
 - [x] Unlike Vanilla JavaScript, I'm also supporting `parseFloat()` w/ dynamic radix/base.
 - [x] Some other numeric functions, like testing strings, numbers, etc. pp..
-- [x] Parsing and Rendering both **time** and **size** values.
+- [x] Kinda `isNaN` (for Strings) but for any radix/base.
+- [x] Parsing, rendering and calculations both **time** and **size** values.
 - [x] Some more numeric extensions (better sign handling, ...);
 - [x] Both `Number` and `BigInt` fully supported.
 - [ ] TODO: I've to find my old code for exponents.
 - [ ] TODO: Maybe also find my old code for localized strings..
+- [ ] TODO: And the code to handle `BigInt` **time** (see `process.hrtime.bigint()`);
 
 <br>
 
@@ -43,7 +45,7 @@ These are my main features:
 ## Download
 Two main files. Partially still under development..
 
-* [**`radix.js`**](src/radix.js)
+* [**`base.js`**](src/base.js)
 * [**`unit.js`**](src/unit.js)
 
 have phun!
