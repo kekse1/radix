@@ -24,7 +24,6 @@ These are my main features:
 - [x] Extra \*near\* byte code w/ 1 to 3 less bytes for [ `.`, `-`, `+` ] bytes..
 - [x] Negative radix/base are also supported (inversed/reversed alphabets, ...);
 - [x] Unlike Vanilla JavaScript, I'm also supporting `parseFloat()` w/ dynamic radix/base.
-- [x] Some other numeric functions, like testing strings, numbers, etc. pp..
 - [x] Kinda `isNaN` (for Strings) but for any radix/base.
 - [x] Parsing, rendering and calculations both **time** and **size** values.
 - [x] Some more numeric extensions (better sign handling, ...);
