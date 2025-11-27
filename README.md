@@ -32,8 +32,11 @@ These are my main features:
 - [ ] TODO: Maybe also find my old code for localized strings..
 - [ ] TODO: And the code to handle `BigInt` **time** (see `process.hrtime.bigint()`);
 
-Caution: Script will extend the global `Number` and `BigInt` Objects,
-so please `import` it/them only once!
+<br>
+
+> [!WARNING]
+> Script(s) will extend the global `Number` and `BigInt` Objects,
+> so please `import` it/them only once!
 
 > [!NOTE]
 > It's **not** another [`decimal.js`](https://mikemcl.github.io/decimal.js/)!
