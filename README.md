@@ -40,7 +40,7 @@ These are my main features:
 <br>
 
 > [!WARNING]
-> Script(s) will extend the global `Number` and `BigInt` Objects,
+> Script(s) will also extend the global `Number` and `BigInt` Objects,
 > so please `import` it/them only once!
 
 <br>
