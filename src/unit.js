@@ -302,8 +302,6 @@ Math.time.render.html = (_value, _sep = ' ', _space = true, _short = false, _non
 	return Math.time.render(_value, _sep, _space, _short, _none, true, _ms); };
 
 //
-//TODO/use for `norbert --timeout [..]`... therefore this one was created!11 ;-)
-//
 Math.time.parse = (... _args) => {
 	if(_args.length === 0)
 	{
@@ -449,13 +447,16 @@ Math.time.parse.timeout = (... _args) => {
 		return null;
 	}
 
-	if(result > MAX_TIMEOUT)
+	if(result > Number.MAX_TIMEOUT)
 	{
 		return null;
 	}
 
 	return result;
 };
+
+Reflect.defineProperty(Number, 'MAX_TIMEOUT', {
+	get: () => (((2 ** 32) / 2) - 1) });
 
 Math.time.units = {
 	'ms': 1,
