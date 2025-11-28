@@ -53,9 +53,9 @@ Two main files. Partially still under development..
 
 have phun!
 
-<br>
+<br><br>
 
-## Tip
+## Related
 See also my [**Field**](https://github.com/kekse1/field/) implementation,
 which is also using kinda base/radix conversion!
 
