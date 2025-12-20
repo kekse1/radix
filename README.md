@@ -2,7 +2,7 @@
 
 <br><br>
 
-# **`Radix`**
+# **`RADIX`**
 This is 'under development', maybe.. it needs adaption to run without
 my own library extension(s). But you can use it if you want to create
 your own polyfills - it should work really well, right now!
@@ -16,7 +16,7 @@ for you!
 > [!NOTE]
 > It's **not** another [`decimal.js`](https://mikemcl.github.io/decimal.js/)!
 > If you need real numeric precision, use this one or smth. similar.
-> This `Radix` module just extends the base numeric features of JavaScript.
+> This `radix` module just extends the base numeric features of JavaScript.
 
 <br>
 
