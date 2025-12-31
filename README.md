@@ -48,8 +48,7 @@ These are my main features:
 ## Download
 Two main files. Partially still under development..
 
-* [**`base.js`**](src/base.js)
-* [**`unit.js`**](src/unit.js)
+* [**`radix.js`**](src/radix.js)
 
 have phun!
 
