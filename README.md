@@ -51,7 +51,7 @@ Etwas unleserlich (not so clean code)... still TODO.
 * [**`radix.js`**](src/radix.js)
 
 One file has been removed now, because it's code was a bit older.
-Also TODO (see e.g. [`zsleep`](https://github.com/kekse1/zsleep/));
+Also TODO (see e.g. [`asleep`](https://github.com/kekse1/asleep/));
 
 So now.. have phun!
 
@@ -61,7 +61,7 @@ So now.. have phun!
 See also my [**Field**](https://github.com/kekse1/field/) implementation,
 which is also using kinda base/radix conversion!
 
-And the [`zsleep`](https://github.com/kekse1/zsleep/) also got some code
+And the [`asleep`](https://github.com/kekse1/asleep/) also got some code
 for unit conversions (the **time** in this case).
 
 <br><br>
