@@ -58,7 +58,7 @@ Etwas unleserlich (not so clean code)... still TODO. Die zweite Datei ist schon 
 
 <br>
 
-Some of my other implementations are [in my **v4**](kekse.biz/js/lib/globals/math.unit.js);
+Some of my other implementations are [in my **v4**](https://kekse.biz/js/lib/globals/math.unit.js);
 .. not really better, but some possible alternatives?
 
 <br><br><br>
