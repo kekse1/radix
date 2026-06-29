@@ -18,6 +18,11 @@ for you!
 > If you need real numeric precision, use this one or smth. similar.
 > This `radix` module just extends the base numeric features of JavaScript.
 
+<br><br>
+
+## News
+* \[**2026-06-29**\] Just published also the `unit.js` (again, but a bit better this time);
+
 <br>
 
 ## Description
@@ -43,28 +48,15 @@ These are my main features:
 > Script(s) will also extend the global `Number` and `BigInt` Objects,
 > so please `import` it/them only once!
 
-<br>
+<br><br>
 
 ## Download
-Etwas unleserlich (not so clean code)... still TODO.
+Etwas unleserlich (not so clean code)... still TODO. Die zweite Datei ist schon etwas besser. ..
 
 * [**`radix.js`**](src/radix.js)
+* [**`unit.js`**](src/unit.js)
 
-One file has been removed now, because it's code was a bit older.
-Also TODO (see e.g. [`asleep`](https://github.com/kekse1/asleep/));
-
-So now.. have phun!
-
-<br><br>
-
-## Related
-See also my [**Field**](https://github.com/kekse1/field/) implementation,
-which is also using kinda base/radix conversion!
-
-And the [`asleep`](https://github.com/kekse1/asleep/) also got some code
-for unit conversions (the **time** in this case).
-
-<br><br>
+<br><br><br>
 
 # Contact
 <img src="https://kekse.biz/github.php?override=github:radix&draw&text=radix@kekse.biz&angle=6&size=38pt&fg=150,20,90&font=OpenSans&ro&readonly&h=64&v=16" />
