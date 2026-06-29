@@ -56,6 +56,10 @@ Etwas unleserlich (not so clean code)... still TODO. Die zweite Datei ist schon 
 * [**`radix.js`**](src/radix.js)
 * [**`unit.js`**](src/unit.js)
 
+<br>
+
+Some of my other implementations are [here in my **v4**](kekse.biz/js/lib/globals/math.unit.js); ...
+
 <br><br><br>
 
 # Contact
