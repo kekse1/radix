@@ -21,7 +21,8 @@ for you!
 <br><br>
 
 ## News
-* \[**2026-06-29**\] Just published also the `unit.js` (again, but a bit better this time);
+* \[**2026-07-02**\] Really much better version of the latest [`unit.js`](src/unit.js)!
+* \[**2026-06-29**\] Just published the second file [`unit.js`](src/unit.js) (again, but a bit better this time);
 
 <br>
 
@@ -51,15 +52,18 @@ These are my main features:
 <br><br>
 
 ## Download
-Etwas unleserlich (not so clean code)... still TODO. Die zweite Datei ist schon etwas besser. ..
+Etwas unleserlich (not so clean code)... still TODO. Die zweite Datei ist aber schon etwas besser! ..
 
 * [**`radix.js`**](src/radix.js)
 * [**`unit.js`**](src/unit.js)
 
-<br>
+<br><br>
 
-Some of my other implementations are [in my **v4**](https://kekse.biz/js/lib/globals/math.unit.js);
-.. not really better, but some possible alternatives?
+```
+/* for other example size/time implementations see the url:
+ * < https://kekse.biz/?js/lib/globals/math.unit.js > ...
+ * .. but this one is pretty.. ok! */
+```
 
 <br><br><br>
 

@@ -3,11 +3,9 @@
  * https://kekse.biz/ https://github.com/kekse1/radix/
  */
 
-/*
- * just a temporary solution.. but it works (very well)!
- * at least it should.. the code itself is kinda untested.
- * it works in my environment, but this port is untested..
- */
+/* for other example size/time implementations see the url:
+ * < https://kekse.biz/?js/lib/globals/math.unit.js > ...
+ * .. but this one is pretty.. ok! */
 
 //
 const
@@ -336,20 +334,46 @@ Math.size.parse = (_value) => {
 		return 0;
 	}
 	
-	var result = 0;
-	var unit = '', value = '', _unit;
+	var	result = 0;
+	var	value = '',
+		unit = '',
+		UNIT;
+	
+	const tryValue = () => {
+		if(value === '-')
+		{
+			return true;
+		}
+		
+		if(!(UNIT = Math.size.getUnit(unit)))
+		{
+			return false;
+		}
+
+		result += (Number(value) * UNIT[1] ** UNIT[0]);
+		unit = value = '';
+		return true;
+	};
 	
 	for(var i = 0; i < _value.length; ++i)
 	{
-		if(_value[i] === '+' || _value[i] === '-' || _value[i] === ',')
+		if(_value[i] === '+' || _value[i] === '-' || _value[i] === ',' || _value[i] === ' ' || _value[i] === '\t')
 		{
-			if(value)
+			if(value && !tryValue())
 			{
-				_unit = Math.size.getUnit(unit.trim());
-				result += (Number(value) * _unit[1] ** _unit[0]);
+				return null;
 			}
-
-			unit = value = '';
+			
+			if(_value[i] === '-' && value !== '-')
+			{
+				value = '-';
+			}
+			else
+			{
+				value = '';
+			}
+			
+			unit = '';
 		}
 		else if(isNaN(_value[i]) && _value[i] !== '.')
 		{
@@ -360,11 +384,10 @@ Math.size.parse = (_value) => {
 			value += _value[i];
 		}
 	}
-	
-	if(value)
+
+	if(value && !tryValue())
 	{
-		_unit = Math.size.getUnit(unit.trim());
-		result += (Number(value) * _unit[1] ** _unit[0]);
+		return null;
 	}
 
 	return result;
@@ -372,18 +395,39 @@ Math.size.parse = (_value) => {
 
 Math.size.styled = (_value, _unit_base = DEFAULT_UNIT_BASE, _prec = DEFAULT_UNIT_PREC, _fixed = DEFAULT_FIXED) => Math.size(_value, _unit_base, _prec, _fixed, true);
 
-Math.size.getUnit = (_unit) => {
+Math.size.getUnit = (_unit, _fallback = false) => {
 	if(!(_unit = _unit.trim()))
 	{
-		return [ 0, 1024 ];
+		return [ 0, 0 ];
 	}
 	else if((_unit = _unit.toLowerCase()) === 'b' || _unit === 'byte' || _unit === 'bytes')
 	{
 		return [ 0, 0 ];
 	}
-	
+
 	var base;
 	var units;
+
+	if(_unit.length === 1)
+	{
+		units = Math.size.unit[base = (
+			_unit[0].isLowerCase ? 1000 : 1024)];
+			
+		for(var i = 0; i < units.length; ++i)
+		{
+			if(units[i][0].toLowerCase() === _unit)
+			{
+				return [ i, base ];
+			}
+		}
+		
+		if(_fallback)
+		{
+			return [ 0, base ];
+		}
+		
+		return null;
+	}
 	
 	if(_unit.includes('i'))
 	{
@@ -402,7 +446,12 @@ Math.size.getUnit = (_unit) => {
 		}
 	}
 	
-	return [ 0, base ];
+	if(_fallback)
+	{
+		return [ 0, base ];
+	}
+	
+	return null;
 };
 
 Math.size.unit = {};
@@ -589,7 +638,7 @@ Math.time.parse = (... _args) => {
 			continue;
 		}
 
-		if(str[i] === '+' || str[i] === ',')
+		if(str[i] === '+' || str[i] === ',' || str[i] === ' ' || str[i] === '\t')
 		{
 			if(!add(value, unit))
 			{
