@@ -124,7 +124,8 @@ Reflect.defineProperty(Math, 'size', { value: (_value, _unit_base = DEFAULT_UNIT
 		}
 		else
 		{
-			[ index, base ] = Math.size.getUnit(_unit_base);
+			[ index, base ] = Math.size.getUnit(
+				_unit_base, true);
 		}
 	}
 	else
@@ -345,7 +346,7 @@ Math.size.parse = (_value) => {
 			return true;
 		}
 		
-		if(!(UNIT = Math.size.getUnit(unit)))
+		if(!(UNIT = Math.size.getUnit(unit, false)))
 		{
 			return false;
 		}
