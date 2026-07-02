@@ -59,11 +59,9 @@ Etwas unleserlich (not so clean code)... still TODO. Die zweite Datei ist aber s
 
 <br><br>
 
-```
-/* for other example size/time implementations see the url:
- * < https://kekse.biz/?js/lib/globals/math.unit.js > ...
- * .. but this one is pretty.. ok! */
-```
+> [!TIP]
+> For other example size/time implementations see this URL:
+> < https://kekse.biz/?js/lib/globals/math.unit.js >
 
 <br><br><br>
 
