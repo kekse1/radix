@@ -401,27 +401,30 @@ Math.size.getUnit = (_unit, _fallback = false) => {
 	{
 		return [ 0, 0 ];
 	}
-	else if((_unit = _unit.toLowerCase()) === 'b' || _unit === 'byte' || _unit === 'bytes')
+	
+	const	lower = _unit.toLowerCase();
+	
+	if(lower === 'b' || lower === 'byte' || lower === 'bytes')
 	{
 		return [ 0, 0 ];
 	}
 
-	var base;
-	var units;
+	var	base,
+		units;
 
 	if(_unit.length === 1)
 	{
 		units = Math.size.unit[base = (
 			_unit[0].isLowerCase ? 1000 : 1024)];
-			
+
 		for(var i = 0; i < units.length; ++i)
 		{
-			if(units[i][0].toLowerCase() === _unit)
+			if(units[i][0].toLowerCase() === lower)
 			{
 				return [ i, base ];
 			}
 		}
-		
+
 		if(_fallback)
 		{
 			return [ 0, base ];
@@ -430,6 +433,8 @@ Math.size.getUnit = (_unit, _fallback = false) => {
 		return null;
 	}
 	
+	_unit = lower;
+
 	if(_unit.includes('i'))
 	{
 		units = Math.size.unit[base = 1024];
