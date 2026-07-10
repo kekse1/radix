@@ -1,17 +1,19 @@
 <img src="https://kekse.biz/github.php?draw&override=github:radix" />
 
-<br><br>
-
 # **`RADIX`**
 This is 'under development', maybe.. it needs adaption to run without
 my own library extension(s). But you can use it if you want to create
 your own polyfills - it should work really well, right now!
+
+<br>
 
 I'm using it in the Web Browser and w/ [Node.js](https://nodejs.org/).
 
 Since I've implemented many versions of the same functionality (more/less),
 I had to decide which ones to publish here. I hope it's the best version
 for you!
+
+<br>
 
 > [!NOTE]
 > It's **not** another [`decimal.js`](https://mikemcl.github.io/decimal.js/)!
@@ -24,7 +26,7 @@ for you!
 * \[**2026-07-02**\] Really much better version of the latest [`unit.js`](src/unit.js)!
 * \[**2026-06-29**\] Just published the second file [`unit.js`](src/unit.js) (again, but a bit better this time);
 
-<br>
+<br><br>
 
 ## Description
 These are my main features:
@@ -68,6 +70,8 @@ Etwas unleserlich (not so clean code)... still TODO. Die zweite Datei ist aber s
 # Contact
 <img src="https://kekse.biz/github.php?override=github:radix&draw&text=radix@kekse.biz&angle=6&size=38pt&fg=150,20,90&font=OpenSans&ro&readonly&h=64&v=16" />
 
+<br>
+
 # Copyright and License
 The Copyright is [(c) Sebastian Kucharczyk](COPYRIGHT.txt),
 and it's licensed under the [MIT](LICENSE.txt) (also known as 'X' or 'X11' license).
@@ -75,3 +79,4 @@ and it's licensed under the [MIT](LICENSE.txt) (also known as 'X' or 'X11' licen
 <a href="https://kekse.biz/">
 <img src="favicon.png" alt="Favicon" />
 </a>
+
