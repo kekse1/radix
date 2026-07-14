@@ -29,7 +29,7 @@ for you!
 
 <br><br>
 
-## Description
+## Features
 These are my main features:
 
 - [x] Numeric conversions between various radix/base.
@@ -53,12 +53,6 @@ These are my main features:
 > Script(s) will also extend the global `Number` and `BigInt` Objects,
 > so please `import` it/them only once!
 
-<br>
-
-> [!NOTE]
-> The [`clock.js`](src/clock.js) is currently under development (to extend
-> my [`asleep`](https://github.com/kekse1/asleep/)); ...
-
 <br><br>
 
 ## Download
@@ -67,6 +61,12 @@ Etwas unleserlich (not so clean code)... still TODO. Die zweite Datei ist aber s
 - [x] [**`radix.js`**](src/radix.js)
 - [x] [**`unit.js`**](src/unit.js)
 - [ ] [`clock.js`](src/clock.js)
+
+<br>
+
+> [!NOTE]
+> The [`clock.js`](src/clock.js) is currently under development
+> (to extend my [`asleep`](https://github.com/kekse1/asleep/) project)!
 
 <br><br>
 
