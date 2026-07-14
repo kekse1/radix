@@ -64,8 +64,9 @@ These are my main features:
 ## Download
 Etwas unleserlich (not so clean code)... still TODO. Die zweite Datei ist aber schon etwas besser! ..
 
-* [**`radix.js`**](src/radix.js)
-* [**`unit.js`**](src/unit.js)
+- [x] [**`radix.js`**](src/radix.js)
+- [x] [**`unit.js`**](src/unit.js)
+- [ ] [`clock.js`](src/clock.js)
 
 <br><br>
 
