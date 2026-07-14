@@ -45,12 +45,19 @@ These are my main features:
 - [ ] TODO: I've to find my old code for exponents.
 - [ ] TODO: Maybe also find my old code for localized strings..
 - [ ] TODO: And the code to handle `BigInt` **time** (see `process.hrtime.bigint()`);
+- [ ] [`clock.js`](src/clock.js) (see https://github.com/kekse1/asleep/); ...
 
 <br>
 
 > [!WARNING]
 > Script(s) will also extend the global `Number` and `BigInt` Objects,
 > so please `import` it/them only once!
+
+<br>
+
+> [!NOTE]
+> The [`clock.js`](src/clock.js) is currently under development (to extend
+> my [`asleep`](https://github.com/kekse1/asleep/)); ...
 
 <br><br>
 
