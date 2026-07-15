@@ -24,6 +24,7 @@ for you!
 <br><br>
 
 ## News
+* \[**2026-07-15**\] New `Math.time.clock*` function/namespace. See [`unit.js`](src/unit.js); ...
 * \[**2026-07-02**\] Really much better version of the latest [`unit.js`](src/unit.js)!
 * \[**2026-06-29**\] Just published the second file [`unit.js`](src/unit.js) (again, but a bit better this time);
 
@@ -42,10 +43,10 @@ These are my main features:
 - [x] Parsing, rendering and calculations both **time** and **size** values.
 - [x] Some more numeric extensions (better sign handling, ...);
 - [x] Both `Number` and `BigInt` fully supported.
+- [x] `Math.time.clock*` (look at the sources, fyi);
 - [ ] TODO: I've to find my old code for exponents.
 - [ ] TODO: Maybe also find my old code for localized strings..
 - [ ] TODO: And the code to handle `BigInt` **time** (see `process.hrtime.bigint()`);
-- [ ] [`clock.js`](src/clock.js) (see https://github.com/kekse1/asleep/); ...
 
 <br>
 
@@ -56,19 +57,19 @@ These are my main features:
 <br><br>
 
 ## Download
-Etwas unleserlich (not so clean code)... still TODO. Die zweite Datei ist aber schon etwas besser! ..
+Etwas unleserlich (not so clean code)... still **TODO**.
+Die zweite Datei ist aber schon etwas besser! ...
+und die dritte ist ganz neu (**2026-07-15**).
 
 - [x] [**`radix.js`**](src/radix.js)
 - [x] [**`unit.js`**](src/unit.js)
-- [ ] [`clock.js`](src/clock.js)
 
 <br>
 
-> [!NOTE]
-> The [`clock.js`](src/clock.js) is currently under development
-> (to extend my [`asleep`](https://github.com/kekse1/asleep/) project)!
-> .. and here's a screenshot with **tests** over **possible strings** etc.
-> => [`clock.js.TEST.png`](./img/clock.js.TEST.png); ...
+> [!TIP]
+> The newest *clock* part in the [`unit.js`](src/unit.js) was created in the backup file
+> [`clock.TEST.js`](src/clock.TEST.js) - there you can also find **TEST CASES** - so you
+> get a feeling of the correct syntax, etc. See also the [**screenshot**](./img/clock.TEST.png)!
 
 <br><br>
 
