@@ -74,6 +74,7 @@ und die dritte ist ganz neu (**2026-07-15**).
 
 > [!NOTE]
 > **TODO** is now only a syntax like **`@30s`**! :-D
+> ... sowie `+2(:)**`! ^_^
 
 <br><br>
 

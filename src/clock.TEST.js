@@ -13,6 +13,8 @@ const TESTING = true;
 /*
  *
  * TODO * fehlt nur noch syntax "@30s", etc...!!1 ;-D
+ * 
+ * TODO * sowie "+2(:)**"!!! ^_^
  *
  *
  * WICHTIG! wenn in einem '=' *clock*-string auch '-' bzw. '+' vorkommen,
