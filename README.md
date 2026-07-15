@@ -67,6 +67,8 @@ Etwas unleserlich (not so clean code)... still TODO. Die zweite Datei ist aber s
 > [!NOTE]
 > The [`clock.js`](src/clock.js) is currently under development
 > (to extend my [`asleep`](https://github.com/kekse1/asleep/) project)!
+> .. and here's a screenshot with **tests** over **possible strings** etc.
+> => [`clock.js.TEST.png`](./img/clock.js.TEST.png); ...
 
 <br><br>
 
