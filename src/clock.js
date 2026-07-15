@@ -5,8 +5,10 @@
  * https://kekse.biz/ https://github.com/kekse1/asleep/
  */
 
-// see the BOTTOM of this file.
-const	RUN_TESTS = true;
+//
+// see the BOTTOM of this file: running test cases?
+//
+const TESTING = true;
 
 //
 // @ `asleep`
@@ -41,10 +43,29 @@ const	RUN_TESTS = true;
 // aufteilt..?!!1 ;-D
 //
 
+/*
+ * WICHTIG! wenn in einem '=' *clock*-string auch '-' bzw. '+' vorkommen,
+ * so muss dieser string am ende mit einem weiteren '=' terminiert werden!
+ * .. sonst muss man davon ausgehen, dass '+' bzw. '-' als time-diff sind..
+ */
+
 //
 //nur hier..
 //
 Math.time = {};
+
+//
+const __prepareAndCleanClockString = (_data) => {
+	if(!(_data = _data.trim().toLowerCase()))
+		return null;
+	var c = 0; while(_data[_data.length - ++c] === '=');
+	if(--c) _data = _data.slice(0, -c).trim();
+	c = 0; while(_data[c++] === '=');
+	if(--c) _data = _data.substr(c).trim();
+	if(!(_data = _data.replace(/={2,}/g, '=').trim()))
+		return null;
+	return _data;
+};
 
 //
 Math.time.CLOCK = (_data, _date, _raw = false) => {
@@ -57,59 +78,116 @@ Math.time.CLOCK = (_data, _date, _raw = false) => {
 
 		return null;
 	}
+	
+	const endsWith = ((_data = _data.trim()
+		)[_data.length - 1] === '=');
 
-	if(!(_data = _data.trim()))
+	if((_data = __prepareAndCleanClockString(_data)) === null)
 	{
 		return null;
 	}
+
+	if(endsWith) _data += '=';
 
 	if(!_date)
 	{
 		_date = new Date();
 	}
 
-	var	time = '',
-		clock = '',
-		count = 0,
-		state = 0;
+	const	strings = [ '', '' ], index = [];
+	var	count = 0, state = 0,
+		char, rest, min;
 
 	for(var i = 0; i < _data.length; ++i)
 	{
-		switch(_data[i])
+		char = _data[i].toLowerCase();
+
+		switch(char)
 		{
 			case '=':
 				if(++count > 1)
 				{
+					min = true;
+					
+					for(var j = i + 1; j < _data.length; ++j)
+					{
+						if(_data[j] !== '=')
+						{
+							min = false;
+							break;
+						}
+					}
+					
+					if(min)
+					{
+						break;
+					}
+					
 					return null;
 				}
 
 				state = 1;
 				break;
-			case '+':
+			case ':':
+			case '*':
+			case 'a':
+			case 'p':
+			case 'm':
+				state = 1;
+				break;
 			case ',':
 			case ' ':
 			case '\t':
-			case '-':
 				state = 0;
+				break;
+			case '+':
+			case '-':
+				/*
+				 * WICHTIG! wenn in einem '=' *clock*-string auch '-' bzw. '+' vorkommen,
+				 * so muss dieser string am ende mit einem weiteren '=' terminiert werden!
+				 * .. sonst muss man davon ausgehen, dass '+' bzw. '-' als time-diff sind..
+				 *
+				 *	... e.g. `+36h-24h=+2,48h`
+				 */
+				
+				if(state !== 0)
+				{
+					rest = _data.substr(1).indexOf('=');
+
+					if(rest === -1)
+					{
+						state = 0;
+					}
+
+					index[0] = _data.substr(1).indexOf(',');
+					index[1] = _data.substr(1).indexOf(' ');
+					index[2] = _data.substr(1).indexOf('\t');
+					
+					for(var j = index.length - 1; j >= 0; --j)
+					{
+						if(index[j] === -1)
+						{
+							index.splice(j, 1);
+						}
+					}
+					
+					if(index.length > 0 && (min = Math.min(... index)) < rest)
+					{
+						state = 0;
+					}
+				}
+
 				break;
 		}
 
-		switch(state)
-		{
-			case 0:
-				time += _data[i];
-				break;
-			case 1:
-				clock += _data[i];
-				break;
-		}
+		strings[state] += char;
 	}
 
 	var result;
 
-	if(time && Math.time.parse)
+	if(strings[0] && Math.time.parse)
 	{
-		if((result = Math.time.parse(time)) === null)
+		if((result = Math.time.parse(strings[0])) === null)
 		{
 			return null;
 		}
@@ -119,16 +197,16 @@ Math.time.CLOCK = (_data, _date, _raw = false) => {
 		result = 0;
 	}
 
-	if(clock && Math.time.clock)
+	if(strings[1] && Math.time.clock)
 	{
-		if((clock = Math.time.clock(clock, _date)) === null)
+		if((char = Math.time.clock(strings[1], _date)) === null)
 		{
 			return null;
 		}
 
 		var value = _date.getDate();
 
-		if(Math.time.clock.onNextDay(clock, _date))
+		if(Math.time.clock.onNextDay(char, _date))
 		{
 			++value;
 		}
@@ -136,16 +214,16 @@ Math.time.CLOCK = (_data, _date, _raw = false) => {
 		value = new Date(
 			_date.getFullYear(),
 			_date.getMonth(),
-			value, ... clock);
+			value, ... char);
 		result += (value.getTime() -
 			_date.getTime());
 	}
 
 	if(_raw)
 	{
-		return { result, clock, time,
+		return { result, strings, clock: char,
 			 DATE: Math.time.clock('**', _date),
-			 date: _date, now: _date.getTime()	};
+			 date: _date, now: _date.getTime() };
 	}
 
 	return result;
@@ -157,11 +235,9 @@ Math.time.clock = (_data, _date) => {
 		return null;
 	}
 
-	_data = _data.trim().toLowerCase();
-
-	while(_data[0] === '=')
+	if((_data = __prepareAndCleanClockString(_data)) === null)
 	{
-		_data = _data.substr(1);
+		return null;
 	}
 
 	var meridiem;
@@ -185,7 +261,7 @@ Math.time.clock = (_data, _date) => {
 			0, -2).trim();
 	}
 
-	if(!_data)
+	if((_data = __prepareAndCleanClockString(_data)) === null)
 	{
 		return null;
 	}
@@ -372,7 +448,6 @@ Math.time.clock = (_data, _date) => {
 		}
 		else if(result[i] === '*')
 		{
-throw new Error('invalid');//zzzzzzzz/debug/...
 			result[i] = Math.time.clock.
 				getCurrent(i, _date);
 		}
@@ -451,7 +526,7 @@ Reflect.defineProperty(Math.time.clock.LIMIT, 'str', {
 
 
 //
-if(RUN_TESTS)
+if(TESTING)
 {
 	//
 	const diffTest = '=*:*:30:*';
@@ -497,6 +572,9 @@ if(RUN_TESTS)
 	];
 	
 	TEST.push([ diffTest, true ]);
+	
+	//
+	const WRONG = [];
 
 	//
 	const RESULT = new Array(TEST.length);
@@ -505,6 +583,18 @@ if(RUN_TESTS)
 	{
 		RESULT[i] = [ ... TEST[i], Math.time.
 			clock(TEST[i][0]) ];
+		
+		if(TEST[i][1])
+		{
+			if(RESULT[i][2] === null)
+			{
+				WRONG.push(RESULT[i]);
+			}
+		}
+		else if(RESULT[i][2] !== null)
+		{
+			WRONG.push(RESULT[i]);
+		}
 	}
 	
 	console.dir(RESULT, { depth: 666 });
@@ -513,14 +603,32 @@ if(RUN_TESTS)
 	for(var i = 0; i < TEST.length; ++i)
 	{
 		TEST[i][0] = '+36h-24h=' +
-			TEST[i][0] + ',48h';
+			TEST[i][0] + ',48h==';
 		RESULT[i] = [ ... TEST[i], Math.time.
 			CLOCK(TEST[i][0]) ];
+		
+		if(TEST[i][1])
+		{
+			if(RESULT[i][2] === null)
+			{
+				WRONG.push(RESULT[i]);
+			}
+		}
+		else if(RESULT[i][2] !== null)
+		{
+			WRONG.push(RESULT[i]);
+		}
 	}
 
 	console.dir(RESULT, { depth: 777 });
 
 	//
 	console.dir({ [diffTest]: Math.time.CLOCK(diffTest, null, true) });
+	
+	//
+	if(WRONG.length > 0)
+	{
+		console.dir({ WRONG }, { depth: 888 });
+	}
 }
 
