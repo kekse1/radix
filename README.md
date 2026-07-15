@@ -1,7 +1,7 @@
 <img src="without.svg" /><br>
 <img src="https://kekse.biz/github.php?draw&override=github:radix" />
 
-# **`RADIX`**
+# **`radix`** (and `unit`s)
 This is 'under development', maybe.. it needs adaption to run without
 my own library extension(s). But you can use it if you want to create
 your own polyfills - it should work really well, right now!
