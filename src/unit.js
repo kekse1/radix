@@ -1170,11 +1170,19 @@ Math.time.clock.onCurrentDay = (_clock, _date) => {
 		_date = new Date();
 	}
 	
-	for(var i = 0; i < _clock.length; ++i)
+	var curr; for(var i = 0; i < _clock.length; ++i)
 	{
-		if(_clock[i] < Math.time.clock.getCurrent(i, _date))
+		curr = Math.time.clock.
+			getCurrent(i, _date);
+
+		if(_clock[i] < curr)
 		{
 			return false;
+		}
+
+		if(_clock[i] !== curr)
+		{
+			break;
 		}
 	}
 
