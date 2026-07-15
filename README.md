@@ -29,7 +29,7 @@ for you!
 
 <br><br>
 
-## Description
+## Features
 These are my main features:
 
 - [x] Numeric conversions between various radix/base.
@@ -45,6 +45,7 @@ These are my main features:
 - [ ] TODO: I've to find my old code for exponents.
 - [ ] TODO: Maybe also find my old code for localized strings..
 - [ ] TODO: And the code to handle `BigInt` **time** (see `process.hrtime.bigint()`);
+- [ ] [`clock.js`](src/clock.js) (see https://github.com/kekse1/asleep/); ...
 
 <br>
 
@@ -57,8 +58,15 @@ These are my main features:
 ## Download
 Etwas unleserlich (not so clean code)... still TODO. Die zweite Datei ist aber schon etwas besser! ..
 
-* [**`radix.js`**](src/radix.js)
-* [**`unit.js`**](src/unit.js)
+- [x] [**`radix.js`**](src/radix.js)
+- [x] [**`unit.js`**](src/unit.js)
+- [ ] [`clock.js`](src/clock.js)
+
+<br>
+
+> [!NOTE]
+> The [`clock.js`](src/clock.js) is currently under development
+> (to extend my [`asleep`](https://github.com/kekse1/asleep/) project)!
 
 <br><br>
 
