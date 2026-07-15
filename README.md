@@ -72,6 +72,9 @@ und die dritte ist ganz neu (**2026-07-15**).
 > [`clock.TEST.js`](src/clock.TEST.js) - there you can also find **TEST CASES** - so you
 > get a feeling of the correct syntax, etc. See also the [**screenshot**](./img/clock.TEST.png)!
 
+> [!NOTE]
+> **TODO** is now only a syntax like **`@30s`**! :-D
+
 <br><br>
 
 > [!TIP]
