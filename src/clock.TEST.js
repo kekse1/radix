@@ -10,40 +10,11 @@
 //
 const TESTING = true;
 
-//
-// @ `asleep`
-//
-// diese datei gilt der initialen implementation.
-// spaeter muss alles (aufbereitet!) into `asleep.mjs`!!
-//
-// dient dazu, dass bspw. mit `asleep =6pm` eine uhrzeit
-// angegeben werden kann, wo zusaetzlich auch die regulaeren
-// relativen zeit-diffs weiter zusaetzlich mit gelten..
-// 
-// ... ist hier aber noch nicht ganz vollstaendig alles!
-// ps: erlaubt auch '+', '-' sowie '*'! ^_^
-//
-// TEST CASES on the BOTTOM of this (temporary) file.
-//
-// basis, ungefaehr: `=(0)7[:38[:26[:999]]](am/pm)`
-//
-// for fixed time o'clock! ...
-// possibly additionally to regular
-// time differences (+/- vs. =); ..
-//
-// bedenke "wechselspiel"(!): es ist
-// moeglich, diese neuen '=' mit den
-// alten '+' etc. in einem string zu
-// mischen!! hier muss umgeschaltet
-// werden, mit teil-strings und/oder
-// .split(); oder so in der art..!!
-//
-// bestenfalls eine hoehere, globale
-// basis-funktion, die alles passend
-// aufteilt..?!!1 ;-D
-//
-
 /*
+ *
+ * TODO * fehlt nur noch syntax "@30s", etc...!!1 ;-D
+ *
+ *
  * WICHTIG! wenn in einem '=' *clock*-string auch '-' bzw. '+' vorkommen,
  * so muss dieser string am ende mit einem weiteren '=' terminiert werden!
  * .. sonst muss man davon ausgehen, dass '+' bzw. '-' als time-diff sind..
@@ -537,9 +508,6 @@ const __mathTimeClockPrepareAndCleanClockString = (_data) => {
 		return null;
 	return _data;
 };
-
-//
-
 
 //
 if(TESTING)

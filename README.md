@@ -44,6 +44,7 @@ These are my main features:
 - [x] Some more numeric extensions (better sign handling, ...);
 - [x] Both `Number` and `BigInt` fully supported.
 - [x] `Math.time.clock*` (look at the sources, fyi);
+- [ ] TODO @ **clock**: a syntax like **`@30s`**!!1 :-D
 - [ ] TODO: I've to find my old code for exponents.
 - [ ] TODO: Maybe also find my old code for localized strings..
 - [ ] TODO: And the code to handle `BigInt` **time** (see `process.hrtime.bigint()`);
