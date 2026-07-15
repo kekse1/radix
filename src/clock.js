@@ -105,7 +105,11 @@ Math.time.CLOCK = (_data, _date, _raw = false) => {
 		switch(char)
 		{
 			case '=':
-				if(++count > 1)
+				if(state === 1)
+				{
+					state = 0;
+				}
+				else if(++count > 1)
 				{
 					min = true;
 					
@@ -125,7 +129,6 @@ Math.time.CLOCK = (_data, _date, _raw = false) => {
 					
 					return null;
 				}
-
 				state = 1;
 				break;
 			case ':':
