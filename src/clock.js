@@ -5,12 +5,6 @@
  * https://kekse.biz/ https://github.com/kekse1/asleep/
  */
 
-/*
- * SEE < https://github.com/kekse1/asleep/ >
- * ... that's also the place for the _latest version_!
- * here's only a reference - for an upcoming feature..
- */
-
 // see the BOTTOM of this file.
 const	RUN_TESTS = true;
 
@@ -48,23 +42,127 @@ const	RUN_TESTS = true;
 //
 
 //
-//todo/bedenke, dass '=' nur *einmal* sein darf!1
+//nur hier..
 //
-//todo/'parseClock()' result muss noch umgewandelt werden!1
+Math.time = {};
+
 //
-//todo/wenn zeit >= aktuelle, dann fuer heute. sonst morgen! ;-)
-//
-const parseTime = (_data, _date) => {
-	//
+Math.time.CLOCK = (_data, _date, _raw = false) => {
+	if(typeof _data !== 'string')
+	{
+		if(typeof _data === 'number')
+		{
+			return _data;
+		}
+
+		return null;
+	}
+
+	if(!(_data = _data.trim()))
+	{
+		return null;
+	}
+
+	if(!_date)
+	{
+		_date = new Date();
+	}
+
+	var	time = '',
+		clock = '',
+		count = 0,
+		state = 0;
+
+	for(var i = 0; i < _data.length; ++i)
+	{
+		switch(_data[i])
+		{
+			case '=':
+				if(++count > 1)
+				{
+					return null;
+				}
+
+				state = 1;
+				break;
+			case '+':
+			case ',':
+			case ' ':
+			case '\t':
+			case '-':
+				state = 0;
+				break;
+		}
+
+		switch(state)
+		{
+			case 0:
+				time += _data[i];
+				break;
+			case 1:
+				clock += _data[i];
+				break;
+		}
+	}
+
+	var result;
+
+	if(time && Math.time.parse)
+	{
+		if((result = Math.time.parse(time)) === null)
+		{
+			return null;
+		}
+	}
+	else
+	{
+		result = 0;
+	}
+
+	if(clock && Math.time.clock)
+	{
+		if((clock = Math.time.clock(clock, _date)) === null)
+		{
+			return null;
+		}
+
+		var value = _date.getDate();
+
+		if(Math.time.clock.onNextDay(clock, _date))
+		{
+			++value;
+		}
+
+		value = new Date(
+			_date.getFullYear(),
+			_date.getMonth(),
+			value, ... clock);
+		result += (value.getTime() -
+			_date.getTime());
+	}
+
+	if(_raw)
+	{
+		return { result, clock, time,
+			 DATE: Math.time.clock('**', _date),
+			 date: _date, now: _date.getTime()	};
+	}
+
+	return result;
 };
 
-const parseClock = (_data, _date) => {
+Math.time.clock = (_data, _date) => {
 	if(typeof _data !== 'string')
 	{
 		return null;
 	}
 
 	_data = _data.trim().toLowerCase();
+
+	while(_data[0] === '=')
+	{
+		_data = _data.substr(1);
+	}
 
 	var meridiem;
 	
@@ -83,12 +181,8 @@ const parseClock = (_data, _date) => {
 
 	if(meridiem)
 	{
-		_data = _data.slice(0, -2).trim();
-	}
-
-	while(_data[0] === '=')
-	{
-		_data = _data.substr(1);
+		_data = _data.slice(
+			0, -2).trim();
 	}
 
 	if(!_data)
@@ -101,21 +195,18 @@ const parseClock = (_data, _date) => {
 		_date = new Date();
 	}
 
-	const	strLimit = parseClock.strLimit,
-		intLimit = parseClock.intLimit;
 	const	result = [ '', '', '', '' ];
-	var	state = 0, char;
 
-	const getCurrent = (_state = state) => {
-		switch(_state)
+	if(_data === '**')
+	{
+		for(var i = 0; i < 4; ++i)
 		{
-			case 0: return _date.getHours();
-			case 1: return _date.getMinutes();
-			case 2: return _date.getSeconds();
-			case 3: return _date.getMilliseconds();
-			case 4: return (_date.getHours() < 12 ?
-						'am' : 'pm');
-			default: return null; }};
+			result[i] = Math.time.clock.
+				getCurrent(i, _date);
+		}
+
+		return result;
+	}
 
 	const checkInt = () => {
 		if(state >= 4)
@@ -133,6 +224,13 @@ const parseClock = (_data, _date) => {
 		{
 			result[state++] = 0;
 			return true;
+		}
+		
+		if(result[state] === '*')
+		{
+			result[state] = Math.time.clock.
+				getCurrent(state, _date);
+			++state; return true;
 		}
 
 		var relative = (result[state][0] === '+' ||
@@ -157,7 +255,8 @@ const parseClock = (_data, _date) => {
 				return false;
 			}
 
-			var value = getCurrent();
+			var value = Math.time.clock.
+				getCurrent(state, _date);
 
 			switch(relative)
 			{
@@ -169,15 +268,15 @@ const parseClock = (_data, _date) => {
 					break;
 			}
 
-			if((value % intLimit[state]) < 0)
+			if((value % __intLimit[state]) < 0)
 			{
-				value = ((intLimit[state] + value) %
-						intLimit[state]);
+				value = ((__intLimit[state] + value) %
+						__intLimit[state]);
 			}
 
 			result[state] = value;
 		}
-		else if(result[state] >= intLimit[state])
+		else if(result[state] >= __intLimit[state])
 		{
 			return false;
 		}
@@ -185,6 +284,9 @@ const parseClock = (_data, _date) => {
 		++state;
 		return true;
 	};
+
+	var	state = 0,
+		char;
 
 	parseLoop: for(var i = 0; i < _data.length; ++i)
 	{
@@ -194,7 +296,7 @@ const parseClock = (_data, _date) => {
 		{
 			if(state < 4)
 			{
-				if(result[state].length > strLimit[state])
+				if(result[state].length > __strLimit[state])
 				{
 					return null;
 				}
@@ -235,13 +337,13 @@ const parseClock = (_data, _date) => {
 				return null;
 			}
 
-			result[state] = getCurrent();
+			result[state] = '*';
 		}
 		else if(!isNaN(char))
 		{
 			result[state] += char;
 
-			if(result[state].length > strLimit[state])
+			if(result[state].length > __strLimit[state])
 			{
 				return null;
 			}
@@ -257,12 +359,9 @@ const parseClock = (_data, _date) => {
 		return null;
 	}
 
-	if(meridiem === 'pm')
+	if(meridiem === 'pm' && (result[0] += 12) > __intLimit[0])
 	{
-		if((result[0] += 12) > intLimit[0])
-		{
-			return null;
-		}
+		return null;
 	}
 
 	for(var i = 0; i < result.length; ++i)
@@ -271,62 +370,157 @@ const parseClock = (_data, _date) => {
 		{
 			result[i] = 0;
 		}
+		else if(result[i] === '*')
+		{
+throw new Error('invalid');//zzzzzzzz/debug/...
+			result[i] = Math.time.clock.
+				getCurrent(i, _date);
+		}
 	}
 
 	return result;
 };
 
-parseClock.intLimit =
-	[ 24, 60, 60, 1000 ];
-parseClock.strLimit = new Array(
-	parseClock.intLimit.length);
+Math.time.clock.getCurrent = (_unit, _date) => {
+	if(!_date)
+	{
+		_date = new Date();
+	}
 
-(() => { for(var i = 0; i < parseClock.strLimit.length; ++i)
-		parseClock.strLimit[i] = (((parseClock.
-			intLimit[i] - 1).toString().
-			length) + 1); })();
+	switch(_unit)
+	{
+		case 0: return _date.getHours();
+		case 1: return _date.getMinutes();
+		case 2: return _date.getSeconds();
+		case 3: return _date.getMilliseconds();
+		case 4: throw new Error('debug');
+	}
+	
+	if(typeof _unit === 'number')
+	{
+		return null;
+	}
+	
+	const result = new Array(4);
+	
+	for(var i = 0; i < result.length; ++i)
+	{
+		result[i] = Math.time.clock.
+			getCurrent(i, _date);
+	}
+	
+	return result;
+};
+
+Math.time.clock.onCurrentDay = (_clock, _date) => {
+	if(!_date)
+	{
+		_date = new Date();
+	}
+	
+	for(var i = 0; i < _clock.length; ++i)
+	{
+		if(_clock[i] < Math.time.clock.getCurrent(i, _date))
+		{
+			return false;
+		}
+	}
+
+	return true;
+};
+
+Math.time.clock.onNextDay = (... _args) => !Math.
+	time.clock.onCurrentDay(... _args);
+
+//
+Reflect.defineProperty(Math.time.clock, 'LIMIT', { value: {} });
+
+const __intLimit = [ 24, 60, 60, 1000 ];
+const __strLimit = new Array(__intLimit.length);
+
+(() => { for(var i = 0; i < __strLimit.length; ++i)
+		__strLimit[i] = (((__intLimit[i] - 1).
+			toString().length) + 1); })();
+
+Reflect.defineProperty(Math.time.clock.LIMIT, 'int', {
+	get: () => [ ... __intLimit ] });
+Reflect.defineProperty(Math.time.clock.LIMIT, 'str', {
+	get: () => [ ... __strLimit ] });
+
+//
+
 
 //
 if(RUN_TESTS)
 {
 	//
+	const diffTest = '=*:*:30:*';
+
+	//
 	// some test cases. 2nd (bool) is if it's expected to be successfull.
 	//
-	const test = [
-		[ '8pm',		true	],
-		[ '17',			true	],
-		[ '6:*::::',		true	],
-		[ '6:*:pm',		true	],
+	const TEST = [
+
 		[ '25',			false	],
 		[ '28:45',		false	],
-		[ '10::59',		true	],
 		[ '10::61',		false	],
+		[ '=',			false	],
+		[ '+4pm',		false	],
+		[ '-4pm',		false	],
+		[ '*:-10:-80:*::am',	false	],
+
+		[ '=8pm',		true	],
+		[ '==17',		true	],
+		[ '6:*::::',		true	],
+		[ '6:*:pm',		true	],
+		[ '10::59',		true	],
 		[ '12:23:42:250',	true	],
 		[ '=4:12pm',		true	],
-		[ '=',			false	],
 		[ '-1',			true	],
 		[ '2::8',		true	],
 		[ '2:*::8',		true	],
+		[ ':::*',		true	],	//TODO/testen!!1 nur millisekunden...
 		[ '2:*::*pm',		true	],
 		[ '+2',			true	],
 		[ '-6',			true	],
-		[ '+4pm',		false	],
-		[ '-4pm',		false	],
 		[ '4pm',		true	],
 		[ '-4',			true	],
 		[ '*:-10:-80:*',	true	],
 		[ '::::pm',		true	],
 		[ ':::::::pm',		true	],
-		[ '*:-10:-80:*::am',	false	]
+		[ '::30:',		true	],
+		[ '*:*:30:*',		true	],
+		[ '*',			true	],
+		[ '**',			true	],
+		[ '=*:*:30:*',		true	]
+
 	];
+	
+	TEST.push([ diffTest, true ]);
 
 	//
-	for(var i = 0; i < test.length; ++i)
+	const RESULT = new Array(TEST.length);
+
+	for(var i = 0; i < TEST.length; ++i)
 	{
-		test[i] = [ ... test[i], parseClock(test[i][0]) ];
+		RESULT[i] = [ ... TEST[i], Math.time.
+			clock(TEST[i][0]) ];
 	}
 	
-	console.dir(test, { depth: 666 });
+	console.dir(RESULT, { depth: 666 });
+
+	//
+	for(var i = 0; i < TEST.length; ++i)
+	{
+		TEST[i][0] = '+36h-24h=' +
+			TEST[i][0] + ',48h';
+		RESULT[i] = [ ... TEST[i], Math.time.
+			CLOCK(TEST[i][0]) ];
+	}
+
+	console.dir(RESULT, { depth: 777 });
+
+	//
+	console.dir({ [diffTest]: Math.time.CLOCK(diffTest, null, true) });
 }
 
-//
