@@ -189,11 +189,6 @@ Math.time.clock = (_data, _date) => {
 		}
 		else if(char === '+' || char === '-')
 		{
-			if(state > 3)
-			{
-				return null;
-			}
-
 			if(result[state].length > 0)
 			{
 				return null;
@@ -408,7 +403,7 @@ Math.time.clock.parse = (_data, _date, _raw = false) => {
 
 		var value = _date.getDate();
 
-		if(Math.time.clock.onNextDay(char, _date))
+		if(Math.time.clock.isTomorrow(char, _date))
 		{
 			++value;
 		}
@@ -462,7 +457,7 @@ Math.time.clock.getCurrent = (_unit, _date) => {
 	return result;
 };
 
-Math.time.clock.onCurrentDay = (_clock, _date) => {
+Math.time.clock.isToday = (_clock, _date) => {
 	if(!_date)
 	{
 		_date = new Date();
@@ -487,8 +482,8 @@ Math.time.clock.onCurrentDay = (_clock, _date) => {
 	return true;
 };
 
-Math.time.clock.onNextDay = (... _args) => !Math.
-	time.clock.onCurrentDay(... _args);
+Math.time.clock.isTomorrow = (... _args) => !Math.
+	time.clock.isToday(... _args);
 
 //
 Reflect.defineProperty(Math.time.clock, 'LIMIT', { value: {} });
