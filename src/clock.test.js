@@ -473,28 +473,6 @@ if(TESTING)
 	console.dir(RESULT, { depth: 666 });
 
 	//
-	for(var i = 0; i < TEST.length; ++i)
-	{
-		TEST[i][0] = '+36h-24h@' + TEST[i][0];
-		RESULT[i] = [ ... TEST[i], Math.time.
-			clock.parse(TEST[i][0]) ];
-		
-		if(TEST[i][1])
-		{
-			if(RESULT[i][2] === null)
-			{
-				WRONG.push(RESULT[i]);
-			}
-		}
-		else if(RESULT[i][2] !== null)
-		{
-			WRONG.push(RESULT[i]);
-		}
-	}
-
-	console.dir(RESULT, { depth: 777 });
-
-	//
 	console.dir({ [diffTest]:
 		Math.time.clock.parse(
 			diffTest, null, true) });
@@ -502,7 +480,7 @@ if(TESTING)
 	//
 	if(WRONG.length > 0)
 	{
-		console.dir({ WRONG }, { depth: 888 });
+		console.dir({ WRONG }, { depth: 777 });
 	}
 }
 
