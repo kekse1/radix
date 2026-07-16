@@ -258,9 +258,9 @@ Math.time.clock.parse = (_data, _date, _raw = false) => {
 		return null;
 	}
 
-	if((_data = __mathTimeClockPrepareAndCleanClockString(_data)) === null)
+	if(!(_data = __mathTimeClockPrepareAndCleanClockString(_data)))
 	{
-		return null;
+		return 0;
 	}
 
 	if(!_date)
@@ -282,14 +282,12 @@ Math.time.clock.parse = (_data, _date, _raw = false) => {
 		strings[1] = _data.substr(atIndex + 1);
 	}
 
-	if((strings[0] = __mathTimeClockPrepareAndCleanClockString(strings[0])) === null)
+	strings[0] = __mathTimeClockPrepareAndCleanClockString(strings[0]);
+	strings[1] = __mathTimeClockPrepareAndCleanClockString(strings[1]);
+
+	if(!(strings[0] || strings[1]))
 	{
-		return null;
-	}
-	
-	if((strings[1] = __mathTimeClockPrepareAndCleanClockString(strings[1])) === null)
-	{
-		return null;
+		return 0;
 	}
 
 	var result;
