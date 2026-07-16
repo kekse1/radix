@@ -738,10 +738,7 @@ Math.time.clock = (_data, _date) => {
 		return null;
 	}
 
-	if((_data = __mathTimeClockPrepareAndCleanClockString(_data)) === null)
-	{
-		return null;
-	}
+	_data = __mathTimeClockPrepareAndCleanClockString(_data);
 
 	var meridiem;
 	
@@ -764,9 +761,9 @@ Math.time.clock = (_data, _date) => {
 			0, -2).trim();
 	}
 
-	if((_data = __mathTimeClockPrepareAndCleanClockString(_data)) === null)
+	if(!(_data = __mathTimeClockPrepareAndCleanClockString(_data)))
 	{
-		return null;
+		return [ (meridiem === 'pm' ? 12 : 0), 0, 0, 0 ];
 	}
 
 	if(!_date)
@@ -776,6 +773,11 @@ Math.time.clock = (_data, _date) => {
 
 	if(_data.startsWith('**'))
 	{
+		if(meridiem)
+		{
+			return null;
+		}
+
 		return Math.time.clock.
 			getCurrent(null,
 				_date);
@@ -787,14 +789,14 @@ Math.time.clock = (_data, _date) => {
 			result[state++] = 0;
 			return true;
 		}
-		
+
 		if(result[state] === '*')
 		{
 			result[state] = Math.time.clock.
-				getCurrent(state, _date);
-			++state; return true;
+				getCurrent(state++, _date);
+			return true;
 		}
-
+		
 		var relative = (result[state][0] === '+' ||
 				result[state][0] === '-');
 
@@ -848,22 +850,28 @@ Math.time.clock = (_data, _date) => {
 	};
 
 	const	result = [ '', '', '', '' ];
-	var	state = 0, char;
+	var	state = 0, char, byte;
 
-	parseLoop: for(var i = 0; i < _data.length; ++i)
+	for(var i = 0; i < _data.length; ++i)
 	{
 		char = _data[i].toLowerCase();
 
 		if(char === ':')
 		{
-			if(result[state].length > __strLimit[state])
+			if(!checkInt())
 			{
 				return null;
 			}
 
-			if(!checkInt())
+			if(_data[i + 1] === '*' && _data[i + 2] === '*')
 			{
-				return null;
+				//
+				//todo/.. etwas dubios. ...
+				//
+				if(i > 0 && _data[i - 1] !== ':' && !checkInt())
+				{
+					return null;
+				}
 			}
 		}
 		else if(char === '+' || char === '-')
@@ -877,37 +885,49 @@ Math.time.clock = (_data, _date) => {
 		}
 		else if(char === '*')
 		{
-			if(state === 0 && meridiem)
-			{
-				return null;
-			}
-
 			if(_data[i + 1] === '*')
 			{
-				if(state[result] !== '' && !checkInt())
+				if(result[state] !== '')
+				{
+					if(!checkInt())
+					{
+						return null;
+					}
+				}
+
+				if(state === 0 && meridiem)
 				{
 					return null;
 				}
 
-				for(var j = state; j < 4; ++j)
+				for(; state < 4; ++state)
 				{
-					result[j] = Math.time.
-						clock.getCurrent(
-							j, _date);
+					result[state] = Math.time.clock.
+						getCurrent(state, _date);
 				}
 
 				break;
 			}
-
+			
 			if(result[state] !== '')
+			{
+				return null;
+			}
+
+			if(state === 0 && meridiem)
 			{
 				return null;
 			}
 
 			result[state] = '*';
 		}
-		else if(!isNaN(char))
+		else if((byte = char.charCodeAt()) >= 48 && byte <= 57)
 		{
+			if(result[state][0] === '*')
+			{
+				return null;
+			}
+
 			result[state] += char;
 
 			if(result[state].length > __strLimit[state])
@@ -931,17 +951,17 @@ Math.time.clock = (_data, _date) => {
 		return null;
 	}
 
-	if(meridiem === 'pm' && (result[0] += 12) > __intLimit[0])
-	{
-		return null;
-	}
-
 	for(var i = 0; i < result.length; ++i)
 	{
 		if(result[i] === '')
 		{
 			result[i] = 0;
 		}
+	}
+
+	if(meridiem === 'pm' && (result[0] += 12) > __intLimit[0])
+	{
+		return null;
 	}
 
 	return result;
@@ -1103,7 +1123,7 @@ Reflect.defineProperty(Math.time.clock.LIMIT, 'str', {
 	get: () => [ ... __strLimit ] });
 
 const __mathTimeClockPrepareAndCleanClockString = (_data) => {
-	if(!(_data = _data.trim().toLowerCase())) return null;
+	if(!(_data = _data.trim().toLowerCase())) return '';
 	var c = 0; while(_data[_data.length - ++c] === '@');
 	if(--c) _data = _data.slice(0, -c).trim();
 	c = 0; while(_data[c++] === '@');
