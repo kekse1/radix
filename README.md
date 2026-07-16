@@ -25,7 +25,7 @@ for you!
 
 ## News
 * \[**2026-07-16**\] The newest **clock** features improved (and finished)!
-* \[**2026-07-15**\] New `Math.time.clock*` function/namespace.
+* \[**2026-07-15**\] New `Math.time.clock*` functions/namespace.
 * \[**2026-07-02**\] Really much better version of the latest [`unit.js`](src/unit.js)!
 * \[**2026-06-29**\] Just published the second file [`unit.js`](src/unit.js) (again, but a bit better this time);
 
