@@ -55,16 +55,26 @@ Math.time.clock = (_data, _date) => {
 		_date = new Date();
 	}
 
-	if(_data.startsWith('**'))
-	{
-		if(meridiem)
+	const checkMeridiem = (_item) => {
+		switch(meridiem)
 		{
-			return null;
+			case 'am':
+				if(_item[0] >= 12)
+					_item[0] -= 12;
+				break;
+			case 'pm':
+				if(_item[0] < 12)
+					_item[0] += 12;
+				break;
 		}
 
-		return Math.time.clock.
-			getCurrent(null,
-				_date);
+		return _item;
+	};
+
+	if(_data.startsWith('**'))
+	{
+		return checkMeridiem(Math.time.clock.
+			getCurrent(null, _date));
 	}
 
 	const checkInt = () => {
@@ -98,9 +108,10 @@ Math.time.clock = (_data, _date) => {
 
 		if(relative)
 		{
+			//... oder!!?
 			if(state === 0 && meridiem)
 			{
-				return false;
+				return null;
 			}
 
 			var value = Math.time.clock.
@@ -179,11 +190,6 @@ Math.time.clock = (_data, _date) => {
 					}
 				}
 
-				if(state === 0 && meridiem)
-				{
-					return null;
-				}
-
 				for(; state < 4; ++state)
 				{
 					result[state] = Math.time.clock.
@@ -194,11 +200,6 @@ Math.time.clock = (_data, _date) => {
 			}
 			
 			if(result[state] !== '')
-			{
-				return null;
-			}
-
-			if(state === 0 && meridiem)
 			{
 				return null;
 			}
@@ -243,12 +244,7 @@ Math.time.clock = (_data, _date) => {
 		}
 	}
 
-	if(meridiem === 'pm' && (result[0] += 12) > __intLimit[0])
-	{
-		return null;
-	}
-
-	return result;
+	return checkMeridiem(result);
 };
 
 Math.time.clock.parse = (_data, _date, _raw = false) => {
@@ -431,11 +427,11 @@ if(TESTING)
 		[ '10::61',		false	],
 		[ '+4pm',		false	],
 		[ '-4pm',		false	],
-		[ '*:-10:-80:*::am',	false	],
 		[ '*3:',		false	],
 		[ ':*4',		false	],
-		[ '17pm',		false	],
 
+		[ '*:-10:-80:*::am',	true	],
+		[ '17pm',		true	],
 		[ '',			true	],
 		[ '@@',			true	],
 		[ 'am',			true	],
