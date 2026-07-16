@@ -440,7 +440,9 @@ if(TESTING)
 		[ '@*:*:30:*',		true	],
 		[ ':30**pm',		true	],
 		[ ':30:**pm',		true	],
-		[ '2pm',		true	]
+		[ '2pm',		true	]//,
+		//[ '2:**pm',		null	],
+		//[ '2**pm',		null	]
 
 	];
 	
