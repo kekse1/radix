@@ -731,6 +731,7 @@ Math.time.parse = (... _args) => {
 	return result;
 };
 
+//
 Math.time.clock = (_data, _date) => {
 	if(typeof _data !== 'string')
 	{
@@ -780,21 +781,8 @@ Math.time.clock = (_data, _date) => {
 				_date);
 	}
 
-	const	result = [ '', '', '', '' ];
-
 	const checkInt = () => {
-		if(state >= 4)
-		{
-			return true;
-		}
-
-		if(typeof result[state] === 'number')
-		{
-			++state;
-			return true;
-		}
-
-		if(result[state].length === 0)
+		if(result[state] === '')
 		{
 			result[state++] = 0;
 			return true;
@@ -859,8 +847,8 @@ Math.time.clock = (_data, _date) => {
 		return true;
 	};
 
-	var	state = 0,
-		char;
+	const	result = [ '', '', '', '' ];
+	var	state = 0, char;
 
 	parseLoop: for(var i = 0; i < _data.length; ++i)
 	{
@@ -880,7 +868,7 @@ Math.time.clock = (_data, _date) => {
 		}
 		else if(char === '+' || char === '-')
 		{
-			if(result[state].length > 0)
+			if(result[state] !== '')
 			{
 				return null;
 			}
@@ -896,7 +884,7 @@ Math.time.clock = (_data, _date) => {
 
 			if(_data[i + 1] === '*')
 			{
-				if(result[state] !== '' && !checkInt())
+				if(state[result] !== '' && !checkInt())
 				{
 					return null;
 				}
@@ -911,7 +899,7 @@ Math.time.clock = (_data, _date) => {
 				break;
 			}
 
-			if(result[state])
+			if(result[state] !== '')
 			{
 				return null;
 			}
@@ -938,7 +926,7 @@ Math.time.clock = (_data, _date) => {
 		}
 	}
 
-	if(!checkInt())
+	if(state < 4 && !checkInt())
 	{
 		return null;
 	}
@@ -954,17 +942,11 @@ Math.time.clock = (_data, _date) => {
 		{
 			result[i] = 0;
 		}
-		else if(result[i] === '*')
-		{
-			result[i] = Math.time.clock.
-				getCurrent(i, _date);
-		}
 	}
 
 	return result;
 };
 
-//
 Math.time.clock.parse = (_data, _date, _raw = false) => {
 	if(typeof _data !== 'string')
 	{
@@ -975,127 +957,44 @@ Math.time.clock.parse = (_data, _date, _raw = false) => {
 
 		return null;
 	}
-	
-	const endsWith = ((_data = _data.trim()
-		)[_data.length - 1] === '=');
 
 	if((_data = __mathTimeClockPrepareAndCleanClockString(_data)) === null)
 	{
 		return null;
 	}
 
-	if(endsWith) _data += '=';
-
 	if(!_date)
 	{
 		_date = new Date();
 	}
 
-	const	strings = [ '', '' ], index = [];
-	var	count = 0, state = 0,
-		char, rest, min;
-
-	for(var i = 0; i < _data.length; ++i)
+	const strings = new Array(2);
+	const atIndex = _data.indexOf('@');
+	
+	if(atIndex === -1)
 	{
-		char = _data[i].toLowerCase();
+		strings[0] = _data;
+		strings[1] = '';
+	}
+	else
+	{
+		strings[0] = _data.substr(0, atIndex);
+		strings[1] = _data.substr(atIndex + 1);
+	}
 
-		switch(char)
-		{
-			case '=':
-				/*
-				 * WICHTIG! wenn in einem '=' *clock*-string auch '-' bzw. '+' vorkommen,
-				 * so muss dieser string am ende mit einem weiteren '=' terminiert werden!
-				 * .. sonst muss man davon ausgehen, dass '+' bzw. '-' als time-diff sind..
-				 *
-				 *	... e.g. `+36h-24h=+2,48h`
-				 *
-				 * TODO!??!????? verbessern!?
-				 */
-				if(state === 1)
-				{
-					state = 0;
-				}
-				else if(++count > 1)
-				{
-					min = true;
-					
-					for(var j = i + 1; j < _data.length; ++j)
-					{
-						if(_data[j] !== '=')
-						{
-							min = false;
-							break;
-						}
-					}
-					
-					if(min)
-					{
-						break;
-					}
-					
-					return null;
-				}
-				state = 1;
-				break;
-			case ':':
-			case '*':
-			case 'a':
-			case 'p':
-			case 'm':
-				state = 1;
-				break;
-			case ',':
-			case ' ':
-			case '\t':
-				state = 0;
-				break;
-			case '+':
-			case '-':
-				/*
-				 * WICHTIG! wenn in einem '=' *clock*-string auch '-' bzw. '+' vorkommen,
-				 * so muss dieser string am ende mit einem weiteren '=' terminiert werden!
-				 * .. sonst muss man davon ausgehen, dass '+' bzw. '-' als time-diff sind..
-				 *
-				 *	... e.g. `+36h-24h=+2,48h`
-				 *
-				 * TODO!??!????? verbessern!?
-				 */
-				if(state !== 0)
-				{
-					rest = _data.substr(1).indexOf('=');
-
-					if(rest === -1)
-					{
-						state = 0;
-					}
-
-					index[0] = _data.substr(1).indexOf(',');
-					index[1] = _data.substr(1).indexOf(' ');
-					index[2] = _data.substr(1).indexOf('\t');
-					
-					for(var j = index.length - 1; j >= 0; --j)
-					{
-						if(index[j] === -1)
-						{
-							index.splice(j, 1);
-						}
-					}
-					
-					if(index.length > 0 && (min = Math.min(... index)) < rest)
-					{
-						state = 0;
-					}
-				}
-
-				break;
-		}
-
-		strings[state] += char;
+	if((strings[0] = __mathTimeClockPrepareAndCleanClockString(strings[0])) === null)
+	{
+		return null;
+	}
+	
+	if((strings[1] = __mathTimeClockPrepareAndCleanClockString(strings[1])) === null)
+	{
+		return null;
 	}
 
 	var result;
 
-	if(strings[0])//&& Math.time.parse)
+	if(strings[0] && Math.time.parse)
 	{
 		if((result = Math.time.parse(strings[0])) === null)
 		{
@@ -1107,16 +1006,18 @@ Math.time.clock.parse = (_data, _date, _raw = false) => {
 		result = 0;
 	}
 
-	if(strings[1])//&& Math.time.clock)
+	if(strings[1] && Math.time.clock)
 	{
-		if((char = Math.time.clock(strings[1], _date)) === null)
+		const parsed = Math.time.clock(strings[1], _date);
+		
+		if(parsed === null)
 		{
 			return null;
 		}
-
+		
 		var value = _date.getDate();
 
-		if(Math.time.clock.isTomorrow(char, _date))
+		if(Math.time.clock.isTomorrow(parsed, _date))
 		{
 			++value;
 		}
@@ -1124,16 +1025,9 @@ Math.time.clock.parse = (_data, _date, _raw = false) => {
 		value = new Date(
 			_date.getFullYear(),
 			_date.getMonth(),
-			value, ... char);
+			value, ... parsed);
 		result += (value.getTime() -
 			_date.getTime());
-	}
-
-	if(_raw)
-	{
-		return { result, strings, clock: char,
-			 DATE: Math.time.clock('**', _date),
-			 date: _date, now: _date.getTime() };
 	}
 
 	return result;
@@ -1145,17 +1039,13 @@ Math.time.clock.getCurrent = (_unit, _date) => {
 		_date = new Date();
 	}
 
-	switch(_unit)
+	if(typeof _unit === 'number') switch(_unit)
 	{
 		case 0: return _date.getHours();
 		case 1: return _date.getMinutes();
 		case 2: return _date.getSeconds();
 		case 3: return _date.getMilliseconds();
-	}
-	
-	if(typeof _unit === 'number')
-	{
-		return null;
+		default: return null;
 	}
 	
 	const result = new Array(4);
@@ -1185,7 +1075,7 @@ Math.time.clock.isToday = (_clock, _date) => {
 			return false;
 		}
 
-		if(_clock[i] !== curr)
+		if(_clock[i] > curr)
 		{
 			break;
 		}
@@ -1213,14 +1103,11 @@ Reflect.defineProperty(Math.time.clock.LIMIT, 'str', {
 	get: () => [ ... __strLimit ] });
 
 const __mathTimeClockPrepareAndCleanClockString = (_data) => {
-	if(!(_data = _data.trim().toLowerCase()))
-		return null;
-	var c = 0; while(_data[_data.length - ++c] === '=');
+	if(!(_data = _data.trim().toLowerCase())) return null;
+	var c = 0; while(_data[_data.length - ++c] === '@');
 	if(--c) _data = _data.slice(0, -c).trim();
-	c = 0; while(_data[c++] === '=');
+	c = 0; while(_data[c++] === '@');
 	if(--c) _data = _data.substr(c).trim();
-	if(!(_data = _data.replace(/={2,}/g, '=').trim()))
-		return null;
 	return _data;
 };
 
