@@ -824,12 +824,6 @@ Math.time.clock = (_data, _date) => {
 
 		if(relative)
 		{
-			//... oder!!?
-			if(state === 0 && meridiem)
-			{
-				return false;
-			}
-
 			var value = Math.time.clock.
 				getCurrent(state, _date);
 

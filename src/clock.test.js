@@ -108,12 +108,6 @@ Math.time.clock = (_data, _date) => {
 
 		if(relative)
 		{
-			//... oder!!?
-			if(state === 0 && meridiem)
-			{
-				return null;
-			}
-
 			var value = Math.time.clock.
 				getCurrent(state, _date);
 
@@ -417,11 +411,11 @@ if(TESTING)
 		[ '25',			false	],
 		[ '28:45',		false	],
 		[ '10::61',		false	],
-		[ '+4pm',		false	],
-		[ '-4pm',		false	],
 		[ '*3:',		false	],
 		[ ':*4',		false	],
 
+		[ '+4pm',		true	],
+		[ '-4pm',		true	],
 		[ '*:-10:-80:*::am',	true	],
 		[ '17pm',		true	],
 		[ '',			true	],
