@@ -45,16 +45,6 @@ Math.time.clock = (_data, _date) => {
 			0, -2).trim();
 	}
 
-	if(!(_data = __mathTimeClockPrepareAndCleanClockString(_data)))
-	{
-		return [ (meridiem === 'pm' ? 12 : 0), 0, 0, 0 ];
-	}
-
-	if(!_date)
-	{
-		_date = new Date();
-	}
-
 	const checkMeridiem = (_item) => {
 		switch(meridiem)
 		{
@@ -70,6 +60,16 @@ Math.time.clock = (_data, _date) => {
 
 		return _item;
 	};
+	
+	if(!(_data = __mathTimeClockPrepareAndCleanClockString(_data)))
+	{
+		return checkMeridiem([ 0, 0, 0, 0 ]);
+	}
+
+	if(!_date)
+	{
+		_date = new Date();
+	}
 
 	if(_data.startsWith('**'))
 	{
@@ -127,10 +127,9 @@ Math.time.clock = (_data, _date) => {
 					break;
 			}
 
-			if((value % __intLimit[state]) < 0)
+			if((value %= __intLimit[state]) < 0)
 			{
-				value = ((__intLimit[state] + value) %
-						__intLimit[state]);
+				value = (__intLimit[state] + value);
 			}
 
 			result[state] = value;
@@ -231,16 +230,11 @@ Math.time.clock = (_data, _date) => {
 		}
 	}
 
-	if(state < 4 && !checkInt())
+	while(state < 4)
 	{
-		return null;
-	}
-
-	for(var i = 0; i < result.length; ++i)
-	{
-		if(result[i] === '')
+		if(!checkInt())
 		{
-			result[i] = 0;
+			return null;
 		}
 	}
 
