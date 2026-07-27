@@ -144,6 +144,11 @@ Math.time.clock = (_data, _date) => {
 	{
 		char = _data[i].toLowerCase();
 
+		if(char === '@')
+		{
+			continue;
+		}
+
 		if(char === ':')
 		{
 			if(!checkInt())
@@ -246,10 +251,7 @@ Math.time.clock.parse = (_data, _date, _raw = false) => {
 		return null;
 	}
 
-	if(!(_data = __mathTimeClockPrepareAndCleanClockString(_data)))
-	{
-		return 0;
-	}
+	_data = __mathTimeClockPrepareAndCleanClockString(_data);
 
 	if(!_date)
 	{
@@ -267,16 +269,11 @@ Math.time.clock.parse = (_data, _date, _raw = false) => {
 	else
 	{
 		strings[0] = _data.substr(0, atIndex);
-		strings[1] = _data.substr(atIndex + 1);
+		strings[1] = _data.substr(atIndex);
 	}
 
 	strings[0] = __mathTimeClockPrepareAndCleanClockString(strings[0]);
 	strings[1] = __mathTimeClockPrepareAndCleanClockString(strings[1]);
-
-	if(!(strings[0] || strings[1]))
-	{
-		return 0;
-	}
 
 	var result;
 
@@ -292,29 +289,29 @@ Math.time.clock.parse = (_data, _date, _raw = false) => {
 		result = 0;
 	}
 
-	if(strings[1] && Math.time.clock)
+	if(!strings[1])
 	{
-		const parsed = Math.time.clock(strings[1], _date);
-		
-		if(parsed === null)
-		{
-			return null;
-		}
-		
-		var value = _date.getDate();
-
-		if(Math.time.clock.isTomorrow(parsed, _date))
-		{
-			++value;
-		}
-
-		value = new Date(
-			_date.getFullYear(),
-			_date.getMonth(),
-			value, ... parsed);
-		result += (value.getTime() -
-			_date.getTime());
+		return result;
 	}
+
+	if((strings[1] = Math.time.clock(strings[1], _date)) === null)
+	{
+		return null;
+	}
+		
+	var value = _date.getDate();
+
+	if(Math.time.clock.isTomorrow(strings[1], _date))
+	{
+		++value;
+	}
+
+	value = new Date(
+		_date.getFullYear(),
+		_date.getMonth(),
+		value, ... strings[1]);
+	result += (value.getTime() -
+		_date.getTime());
 
 	return result;
 };
@@ -377,25 +374,15 @@ Math.time.clock.isTomorrow = (... _args) => !Math.
 Reflect.defineProperty(Math.time.clock, 'LIMIT', { value: {} });
 
 const __intLimit = [ 24, 60, 60, 1000 ];
-const __strLimit = new Array(__intLimit.length);
-
-(() => { for(var i = 0; i < __strLimit.length; ++i)
-		__strLimit[i] = (((__intLimit[i] - 1).
-			toString().length) + 1); })();
+const __strLimit = [ 3, 3, 3, 4 ];
 
 Reflect.defineProperty(Math.time.clock.LIMIT, 'int', {
 	get: () => [ ... __intLimit ] });
 Reflect.defineProperty(Math.time.clock.LIMIT, 'str', {
 	get: () => [ ... __strLimit ] });
 
-const __mathTimeClockPrepareAndCleanClockString = (_data) => {
-	if(!(_data = _data.trim().toLowerCase())) return '';
-	var c = 0; while(_data[_data.length - ++c] === '@');
-	if(--c) _data = _data.slice(0, -c).trim();
-	c = 0; while(_data[c++] === '@');
-	if(--c) _data = _data.substr(c).trim();
-	return _data;
-};
+const __mathTimeClockPrepareAndCleanClockString =
+	(_data) => _data.trim().toLowerCase();
 
 //
 if(TESTING)
