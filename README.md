@@ -61,8 +61,8 @@ These are my main features:
 Etwas unleserlich (not so clean code)... still **TODO**.
 Die zweite Datei ist aber schon etwas besser! ...
 
-- [x] [**`radix.js`**](src/radix.js)
-- [x] [**`unit.js`**](src/unit.js)
+* [**`radix.js`**](src/radix.js)
+* [**`unit.js`**](src/unit.js)
 
 <br>
 
