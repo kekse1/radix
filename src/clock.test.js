@@ -240,7 +240,7 @@ Math.time.clock = (_data, _date) => {
 	return checkMeridiem(result);
 };
 
-Math.time.clock.parse = (_data, _date, _raw = false) => {
+Math.time.clock.parse = (_data, _date) => {
 	if(typeof _data !== 'string')
 	{
 		if(typeof _data === 'number')
