@@ -992,7 +992,7 @@ Math.time.clock.parse = (_data, _date, _raw = false) => {
 
 	var result;
 
-	if(strings[0] && Math.time.parse)
+	if(strings[0])
 	{
 		if((result = Math.time.parse(strings[0])) === null)
 		{
