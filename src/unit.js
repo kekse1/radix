@@ -489,7 +489,8 @@ Reflect.defineProperty(Math, 'time', { value: (_value, _long = DEFAULT_TIME_LONG
 		return (result = (res + _unit + _sep) + result); };
 
 	const unit = Math.time.unit;
-	var result = '';
+	var result = ((negative && _negative) ?
+			'(-) ' : '');
 	var index = -1;
 	var u, v;
 
@@ -509,11 +510,6 @@ Reflect.defineProperty(Math, 'time', { value: (_value, _long = DEFAULT_TIME_LONG
 		append(v, _long ? ' ' + u[1] : u[3]);
 		if(u[0] > 0) _value = Math.floor(_value / u[0]);//_value /= u[0];
 		else break;
-	}
-
-	if(negative && _negative)
-	{
-		result = '(-) ' + result;
 	}
 
 	return result.slice(0, -_sep.length).trim();
