@@ -465,7 +465,7 @@ Math.size.unit['1000'] = [ 'Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'Y
 Math.size.unit['1024'] = [ 'Bytes', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB' ];
 
 //
-Reflect.defineProperty(Math, 'time', { value: (_value, _long = DEFAULT_TIME_LONG, _styles = DEFAULT_STYLES, _millisec = DEFAULT_TIME_MILLISEC, _sep = DEFAULT_TIME_SEP) => {
+Reflect.defineProperty(Math, 'time', { value: (_value, _long = DEFAULT_TIME_LONG, _styles = DEFAULT_STYLES, _millisec = DEFAULT_TIME_MILLISEC, _sep = DEFAULT_TIME_SEP, _negative = true) => {
 	if(bigint(_value))
 	{
 		_value = Number(_value / 1000000n);
@@ -475,6 +475,7 @@ Reflect.defineProperty(Math, 'time', { value: (_value, _long = DEFAULT_TIME_LONG
 		return '-/-';
 	}
 
+	const negative = (_value < 0);
 	_value = Math.abs(_value);
 	const orig = _value;
 
@@ -510,11 +511,16 @@ Reflect.defineProperty(Math, 'time', { value: (_value, _long = DEFAULT_TIME_LONG
 		else break;
 	}
 
+	if(negative && _negative)
+	{
+		result = '(-) ' + result;
+	}
+
 	return result.slice(0, -_sep.length).trim();
 }});
 
-Math.time.styled = (_value, _long = DEFAULT_TIME_LONG, _millisec = DEFAULT_TIME_MILLISEC, _sep = DEFAULT_TIME_SEP) => Math.
-	time(_value, _long, true, _millisec, _sep);
+Math.time.styled = (_value, _long = DEFAULT_TIME_LONG, _millisec = DEFAULT_TIME_MILLISEC, _sep = DEFAULT_TIME_SEP, _negative = true) => Math.
+	time(_value, _long, true, _millisec, _sep, _negative);
 
 (() => {
 	Math.time.unit = [

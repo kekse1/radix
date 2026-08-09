@@ -24,6 +24,7 @@ for you!
 <br><br>
 
 ## News
+* \[**2026-08-10**\] Rendering negative times will prepend a prefix (see `_negative`);
 * \[**2026-08-04**\] Removed a little mistake ([`unit.js`](src/unit.js)); ...
 * \[**2026-07-27**\] Some improvements (`clock()` etc.); //**edit**/again **`@10:30pm`**.
 * \[**2026-07-15**\] New `Math.time.clock*` functions/namespace.
