@@ -82,7 +82,7 @@ Die zweite Datei ist aber schon etwas besser! ...
 <br>
 
 > [!TIP]
-> Now (**2026-08-26**) also more code at https://github.com/kekse1/getopt.js/blob/git/src/getopt.num.mjs
+> Now (**2026-08-26**) also more code at https://github.com/kekse1/getopt.js/blob/git/src/getopt.math.mjs
 
 <br><br><br>
 
