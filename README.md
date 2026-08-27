@@ -79,6 +79,11 @@ Die zweite Datei ist aber schon etwas besser! ...
 > For other example size/time implementations see this URL:
 > < https://kekse.biz/?js/lib/globals/math.unit.js >
 
+<br>
+
+> [!TIP]
+> Now (**2026-08-26**) also more code at https://github.com/kekse1/getopt.js/blob/git/src/getopt.num.mjs
+
 <br><br><br>
 
 # Contact
